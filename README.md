@@ -89,22 +89,10 @@ Python version, current directory, and local time using Python APIs.
 
 ## 🧠 Architecture
 
-```mermaid
-flowchart TD
-    A[User request] --> B[Gemini reads the request and instructions]
-    B --> C{Tool needed?}
-    C -- No --> D[Answer directly]
-    C -- Yes --> E{Choose a registered tool}
-    E --> F[Stock lookup]
-    E --> G[Allowlisted OS operation]
-    E --> H[System details]
-    F --> I[Structured observation]
-    G --> I
-    H --> I
-    I --> J[Gemini composes final answer]
-    D --> K[Display in terminal]
-    J --> K
-```
+[![Gemini tool-using agent architecture](docs/architecture.svg)](docs/architecture.svg)
+
+The diagram shows the complete request-to-answer loop and the safety boundary
+around the three registered tools. Select it to open the full-size version.
 
 For **“What is Apple's latest stock price?”**, the workflow is:
 
@@ -225,6 +213,12 @@ Gemini: The latest available Apple (AAPL) price is ...
 Prices, timestamps, wording, and availability vary. Never treat example output
 as a current market quote.
 
+### Recorded terminal session
+
+[`terminal_output.txt`](terminal_output.txt) contains an actual local run showing
+successful stock and system-tool calls, provider errors, and graceful recovery.
+It is included as evidence of execution, not as a source of current stock prices.
+
 ## 🛡️ Safety design
 
 Local command execution is the most sensitive feature. The project limits it in
@@ -250,9 +244,12 @@ the latest copy does not erase it from Git history.
 gemini_agent_vscode_starter/
 ├── .env.example                Safe configuration template
 ├── .gitignore                  Secret, environment, and cache exclusions
+├── docs/
+│   └── architecture.svg        Visual tool-calling architecture
 ├── gemini_agent_commented.py   Agent, tools, prompts, and terminal loop
 ├── README.md                   Project guide and learning reference
-└── requirements.txt            Python dependencies
+├── requirements.txt            Python dependencies
+└── terminal_output.txt         Recorded example execution
 ```
 
 Read `gemini_agent_commented.py` from top to bottom. Its numbered sections move

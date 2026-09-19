@@ -20,6 +20,4 @@ __pycache__/
 Thumbs.db
 
 # Local run artifacts
-terminal_output.txt
 *.log
-

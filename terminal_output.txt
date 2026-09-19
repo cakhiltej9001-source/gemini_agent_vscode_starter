@@ -1,0 +1,98 @@
+# Recorded demonstration session
+# Historical prices shown below are examples from this run, not current quotes.
+
+(.venv) PS <PROJECT_DIR>> python gemini_agent_commented.py
+
+======================================================================
+🤖 GEMINI TOOL-USING AI AGENT
+======================================================================
+
+Model: gemini-3.8-flash
+
+Available abilities:
+  📈 Get the latest available stock prices
+  💻 Run a small set of safe OS commands
+  🖥️ Inspect basic system information
+
+Try questions such as:
+  1. What is NVIDIA's latest stock price?
+  2. What is Apple's latest stock price?
+  3. List the files in my current directory.
+  4. What Python version am I running?
+  5. What operating system am I using?
+
+Type 'exit' to stop.
+
+👤 You: what is open ai latest stock price ?
+
+📈 TOOL CALLED -> get_stock_price('OPENAI')
+Cookie fetch from fc.yahoo.com failed (ConnectionError), continuing without it
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: OPENAI"}}}
+$OPENAI: No data found, symbol may be delisted
+$OPENAI: No data found, symbol may be delisted
+
+❌ ERROR:
+503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+👤 You: what is meta latest stock price ?   
+
+❌ ERROR:
+503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+👤 You: what is apple latest stock price ?
+
+📈 TOOL CALLED -> get_stock_price('AAPL')
+✅ STOCK TOOL RESULT: {'success': True, 'symbol': 'AAPL', 'latest_price': 335.59, 'timestamp': '2026-09-18 15:59:00-04:00', 'source': 'Yahoo Finance via yfinance', 'note': 'Latest available market price. Data can be delayed depending on the exchange/provider.'}
+
+🤖 Gemini:
+The latest stock price for Apple (AAPL) is **$335.59**.
+
+👤 You: What is Microsoft's latest stock price?
+
+📈 TOOL CALLED -> get_stock_price('MSFT')
+✅ STOCK TOOL RESULT: {'success': True, 'symbol': 'MSFT', 'latest_price': 493.46, 'timestamp': '2026-09-18 15:59:00-04:00', 'source': 'Yahoo Finance via yfinance', 'note': 'Latest available market price. Data can be delayed depending on the exchange/provider.'}
+
+🤖 Gemini:
+The latest stock price for Microsoft (MSFT) is **$493.46**.
+
+👤 You: List the files in my current directory
+
+❌ ERROR:
+503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+👤 You: What Python version am I using?
+
+❌ ERROR:
+503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+
+👤 You: List the files in my current directory
+
+💻 TOOL CALLED -> run_os_command('list_files')
+✅ OS TOOL RESULT:
+Directory of <PROJECT_DIR>
+
+<DIR>          .venv
+               gemini_agent_commented.py
+               requirements.txt
+
+🤖 Gemini:
+Here are the files and folders found in your current project directory:
+
+- **`.venv`** (Virtual environment folder)
+- **`gemini_agent_commented.py`** (Python script)
+- **`requirements.txt`** (Dependencies file)
+
+👤 You: What Python version am I using?        
+
+💻 TOOL CALLED -> run_os_command('python_version')
+✅ OS TOOL RESULT:
+Python 3.14.4
+
+🤖 Gemini:
+You are using **Python 3.14.4**.
+
+👤 You: Traceback (most recent call last):
+  File "<PROJECT_DIR>\gemini_agent_commented.py", line 474, in <module>
+    user_query = input("👤 You: ").strip()
+                 ~~~~~~~~~~~~~~~~
+KeyboardInterrupt
