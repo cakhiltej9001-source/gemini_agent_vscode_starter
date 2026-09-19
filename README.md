@@ -32,6 +32,25 @@ tool-calling loop without a framework such as LangChain or LangGraph.
 | **Interface** | Interactive terminal chat with session context |
 | **Learning style** | One extensively commented Python file |
 
+## 🧠 Architecture
+
+[![Gemini tool-using agent architecture](docs/architecture.svg)](docs/architecture.svg)
+
+The diagram shows the complete request-to-answer loop and the safety boundary
+around the three registered tools. Select it to open the full-size version.
+
+For **“What is Apple's latest stock price?”**, the workflow is:
+
+1. The terminal sends the question to the Gemini chat session.
+2. Gemini recognizes that current market data is required.
+3. Gemini calls `get_stock_price` with `Apple` or `AAPL`.
+4. Python queries `yfinance` and returns structured data.
+5. Gemini receives the observation and writes a concise answer.
+6. The terminal displays the result.
+
+For a system request, Gemini selects only a name such as `python_version`. The
+application—not the model—maps it to a fixed command array.
+
 ### 🌟 What makes this project interesting?
 
 - 🧠 **Model-directed tool selection:** Gemini decides whether a request needs a
@@ -86,25 +105,6 @@ The mapping is platform-aware for Windows, Linux, and macOS.
 
 `get_system_details()` returns the operating system, version, machine type,
 Python version, current directory, and local time using Python APIs.
-
-## 🧠 Architecture
-
-[![Gemini tool-using agent architecture](docs/architecture.svg)](docs/architecture.svg)
-
-The diagram shows the complete request-to-answer loop and the safety boundary
-around the three registered tools. Select it to open the full-size version.
-
-For **“What is Apple's latest stock price?”**, the workflow is:
-
-1. The terminal sends the question to the Gemini chat session.
-2. Gemini recognizes that current market data is required.
-3. Gemini calls `get_stock_price` with `Apple` or `AAPL`.
-4. Python queries `yfinance` and returns structured data.
-5. Gemini receives the observation and writes a concise answer.
-6. The terminal displays the result.
-
-For a system request, Gemini selects only a name such as `python_version`. The
-application—not the model—maps it to a fixed command array.
 
 ## 🧩 Core concepts
 
